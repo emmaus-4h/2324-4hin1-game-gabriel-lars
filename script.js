@@ -18,6 +18,7 @@
 const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
+const KEY_LEFT = 37;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
@@ -31,6 +32,10 @@ var health = 100;  // health van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function() {
+if(keyIsDown(68));
+  spelerX = spelerX-2;
+ spelerX = spelerX -4;
+  
   // speler
 
   // vijand
@@ -86,7 +91,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
+  background('red');
 }
 
 /**
