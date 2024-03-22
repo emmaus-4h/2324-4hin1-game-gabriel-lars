@@ -31,17 +31,34 @@ var health = 100;  // health van speler
 /**
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
-var beweegAlles = function() {
-if(keyIsDown(68));
-  spelerX = spelerX-2;
- spelerX = spelerX -4;
-  
+var beweegAlles = function () {
+  console.log("beweeg")
   // speler
+//a
+  if (keyIsDown(65)) {
+    spelerX = spelerX-5;
+    
+  }
 
+//s
+  if (keyIsDown(83)) {
+    spelerY = spelerY+5;
+  }
+
+//d
+  if (keyIsDown(68)) {
+    spelerX = spelerX+5;
+  }
+
+//w
+  if (keyIsDown(87)) {
+    spelerY = spelerY-5;
+  }
+}
   // vijand
 
   // kogel
-};
+
 
 /**
  * Checkt botsingen
@@ -62,7 +79,8 @@ var verwerkBotsing = function() {
  */
 var tekenAlles = function() {
   // achtergrond
-
+  // Kleur de achtergrond blauw, zodat je het kunt zien
+  background('red');
   // vijand
 
   // kogel
@@ -90,8 +108,7 @@ function setup() {
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
 
-  // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('red');
+  
 }
 
 /**
