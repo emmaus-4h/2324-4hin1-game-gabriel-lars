@@ -87,7 +87,7 @@ console.log ("botsing")
 var tekenAlles = function() {
   // achtergrond
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('red');
+  background('blue');
  
   // vijand
   
