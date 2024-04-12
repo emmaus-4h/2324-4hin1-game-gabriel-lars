@@ -17,12 +17,13 @@
 /* ********************************************* */
 const SPELEN = 1;
 const GAMEOVER = 2;
+const UITLEG = 8;
 var spelStatus = SPELEN;
 const KEY_LEFT = 37;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var health = 100;  // health van speler
+var health = 1;  // health van speler
 
 var vijandX = 200;
 var vijandY = 200;
@@ -33,33 +34,33 @@ var vijandY = 200;
 /**
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
-var beweegAlles = function () {
+var beweegAlles = function() {
   console.log("beweeg")
   // speler
-//a
+  //a
   if (keyIsDown(65)) {
-    spelerX = spelerX-5;
-    
+    spelerX = spelerX - 5;
+
   }
 
-//s
+  //s
   if (keyIsDown(83)) {
-    spelerY = spelerY+5;
+    spelerY = spelerY + 5;
   }
 
-//d
+  //d
   if (keyIsDown(68)) {
-    spelerX = spelerX+5;
+    spelerX = spelerX + 5;
   }
 
-//w
+  //w
   if (keyIsDown(87)) {
-    spelerY = spelerY-5;
+    spelerY = spelerY - 5;
   }
 }
-  // vijand
+// vijand
 
-  // kogel
+// kogel
 
 
 /**
@@ -69,12 +70,14 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function() {
   // botsing speler tegen vijand
-if (spelerX - vijandX <50 && 
-    spelerX -vijandX >-50 &&
-  spelerY - vijandY <50 &&
-  spelerY - vijandY >-50) {
-console.log ("botsing")
-}
+  if (spelerX - vijandX < 50 &&
+    spelerX - vijandX > -50 &&
+    spelerY - vijandY < 50 &&
+    spelerY - vijandY > -50) {
+    console.log("botsing")
+    health = health -1;
+  return true;
+  }
   // botsing kogel tegen vijand
 
   // update punten en health
@@ -88,13 +91,13 @@ var tekenAlles = function() {
   // achtergrond
   // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
- 
+
   // vijand
-  
+
   fill("black");
   rect(175, 175, 50, 50);
   fill("black");
-   ellipse(spelerX, spelerY, 50, 50);
+  ellipse(spelerX, spelerY, 50, 50);
   // kogel
 
   // speler
@@ -106,6 +109,7 @@ var tekenAlles = function() {
   // punten en health
 
 };
+
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -120,7 +124,7 @@ function setup() {
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
 
-  
+
 }
 
 /**
@@ -133,11 +137,19 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
-    if (health <= 0) {
+    if (health <=0) {
       spelStatus = GAMEOVER;
     }
   }
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
+    console.log("gameover");
+     spelerX = 600;
+     spelerY = 600;
   }
+  
+  if (spelStatus === UITLEG) {
+    // teken game-over scherm
+  }
+
 }
