@@ -71,12 +71,12 @@ var beweegAlles = function() {
 var verwerkBotsing = function() {
   // botsing speler tegen vijand
   if (spelerX - vijandX < 50 &&
-    spelerX - vijandX > -50 &&
-    spelerY - vijandY < 50 &&
-    spelerY - vijandY > -50) {
-    console.log("botsing")
-    health = health -1;
-  return true;
+      spelerX - vijandX > -50 &&
+      spelerY - vijandY < 50 &&
+      spelerY - vijandY > -50) {
+        console.log("botsing")
+        health = health -1;
+        return true;
   }
   // botsing kogel tegen vijand
 
@@ -143,9 +143,11 @@ function draw() {
   }
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
-    console.log("gameover");
+    //console.log("gameover");
      spelerX = 600;
      spelerY = 600;
+     text("game over", 200, 200)
+  
   }
   
   if (spelStatus === UITLEG) {
