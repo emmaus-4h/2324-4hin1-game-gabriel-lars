@@ -18,7 +18,7 @@
 const SPELEN = 1;
 const GAMEOVER = 2;
 const UITLEG = 8;
-var spelStatus = SPELEN;
+var spelStatus = UITLEG;
 const KEY_LEFT = 37;
 
 var spelerX = 600; // x-positie van speler
@@ -134,6 +134,8 @@ function setup() {
  */
 function draw() {
   if (spelStatus === SPELEN) {
+    console.log("spelen")
+    health = +1;
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
@@ -144,6 +146,7 @@ function draw() {
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     //console.log("gameover");
+    console.log("gameover")
     spelerX = 600;
     spelerY = 600;
     textSize(125);
@@ -155,10 +158,20 @@ function draw() {
     }
   }
 
-  
+
+
     if (spelStatus === UITLEG) {
-      spelerX = 600;
-      spelStatus = SPELEN;
+      console.log("UITLEG")
+      background("blue");
+     fill("white");
+      textSize(60)
+      text("ontwijk de vijand met W A S D", 250, 300);
+      text("druk op enter om te spelen", 300, 425);
+      if (keyIsDown(13)){
+       spelStatus = SPELEN;
+        // enter voor spelen
+      }
+
       // teken game-over scherm
       // klik op enter voor restart
     }
