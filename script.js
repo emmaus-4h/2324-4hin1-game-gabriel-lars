@@ -144,14 +144,23 @@ function draw() {
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     //console.log("gameover");
-     spelerX = 600;
-     spelerY = 600;
-     text("game over", 200, 200)
-  
+    spelerX = 600;
+    spelerY = 600;
+    textSize(125);
+    text("game over" ,350, 300)
+    textSize(75);
+    text("druk op enter voor start", 275, 450);
+    if (keyIsDown(13)) {
+      spelStatus = SPELEN;
+    }
   }
+
   
-  if (spelStatus === UITLEG) {
-    // teken game-over scherm
-  }
+    if (spelStatus === UITLEG) {
+      spelerX = 600;
+      spelStatus = SPELEN;
+      // teken game-over scherm
+      // klik op enter voor restart
+    }
 
 }
