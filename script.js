@@ -25,6 +25,10 @@ var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var health = 1;  // health van speler
 
+var kogelX = 400;
+var kogelY = 300;
+var kogelVliegt = false;
+
 var vijandX = 200;
 var vijandY = 200;
 /* ********************************************* */
@@ -79,7 +83,7 @@ var verwerkBotsing = function() {
         return true;
   }
   // botsing kogel tegen vijand
-
+  
   // update punten en health
 
 };
@@ -98,14 +102,32 @@ var tekenAlles = function() {
   rect(175, 175, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 50, 50);
-  // kogel
-
+  
   // speler
   fill("white");
   rect(spelerX - 25, spelerY - 25, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
 
+  // kogel
+  
+  fill("yellow");
+  ellipse(kogelX, kogelY, 20, 20);
+
+  if (kogelVliegt === false && keyIsDown(32)){ // start kogel schieten
+  kogelVliegt = true;
+    kogelY= spelerY;
+  kogelX = spelerX;
+}
+
+  if (kogelVliegt === true) { // kogel vliegt
+  kogelY = kogelY -1;
+  }
+
+  if(kogelVliegt === true && kogelY <-10) { // kogel stopt met vliegen
+    kogelVliegt = false;
+  }
+  
   // punten en health
 
 };
