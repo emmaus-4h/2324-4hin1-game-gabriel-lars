@@ -1,10 +1,13 @@
 /* Game opdracht
    Informatica - Emmauscollege Rotterdam
    Template voor een game in JavaScript met de p5 library
-
+l
    Begin met dit template voor je game opdracht,
    voeg er je eigen code aan toe.
  */
+
+
+
 
 /*
  * instellingen om foutcontrole van je code beter te maken 
@@ -31,6 +34,8 @@ var kogelVliegt = false;
 
 var vijandX = 200;
 var vijandY = 200;
+
+var img; //plaatje
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -118,24 +123,36 @@ var tekenAlles = function() {
   kogelVliegt = true;
     kogelY= spelerY;
   kogelX = spelerX;
+
+    
+    Image(img, kogelX-10, kogelY-10, 50, 50)
 }
 
+
   if (kogelVliegt === true) { // kogel vliegt
-  kogelY = kogelY -1;
+  kogelY = kogelY -5;
   }
 
   if(kogelVliegt === true && kogelY <-10) { // kogel stopt met vliegen
     kogelVliegt = false;
   }
   
+
+  
+ 
+
+  
   // punten en health
 
 };
 
-
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
+
+function preload() {
+  img =loadImage('vuurbal.png');
+}
 
 /**
  * setup
