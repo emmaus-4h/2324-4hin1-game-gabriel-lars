@@ -1,13 +1,10 @@
 /* Game opdracht
    Informatica - Emmauscollege Rotterdam
    Template voor een game in JavaScript met de p5 library
-l
+
    Begin met dit template voor je game opdracht,
    voeg er je eigen code aan toe.
  */
-
-
-
 
 /*
  * instellingen om foutcontrole van je code beter te maken 
@@ -34,8 +31,7 @@ var kogelVliegt = false;
 
 var vijandX = 200;
 var vijandY = 200;
-
-var img; //plaatje
+var health_vijand = 1;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -44,7 +40,6 @@ var img; //plaatje
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function() {
-  console.log("beweeg")
   // speler
   //a
   if (keyIsDown(65)) {
@@ -116,18 +111,14 @@ var tekenAlles = function() {
 
   // kogel
   
-  fill("yellow");
+  fill("white");
   ellipse(kogelX, kogelY, 20, 20);
 
   if (kogelVliegt === false && keyIsDown(32)){ // start kogel schieten
   kogelVliegt = true;
     kogelY= spelerY;
   kogelX = spelerX;
-
-    
-    Image(img, kogelX-10, kogelY-10, 50, 50)
 }
-
 
   if (kogelVliegt === true) { // kogel vliegt
   kogelY = kogelY -5;
@@ -135,24 +126,18 @@ var tekenAlles = function() {
 
   if(kogelVliegt === true && kogelY <-10) { // kogel stopt met vliegen
     kogelVliegt = false;
+ health_vijand = health_vijand -1;
+  
   }
-  
-
-  
- 
-
   
   // punten en health
 
 };
 
+
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
-
-function preload() {
-  img =loadImage('vuurbal.png');
-}
 
 /**
  * setup
