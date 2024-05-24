@@ -32,6 +32,9 @@ var kogelVliegt = false;
 var vijandX = 200;
 var vijandY = 200;
 var health_vijand = 1;
+var speed = 4;
+
+var punten = +1;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -61,11 +64,17 @@ var beweegAlles = function() {
   if (keyIsDown(87)) {
     spelerY = spelerY - 5;
   }
+  // vijand
+  vijandX = vijandX + speed;
+  
+  if (vijandX > 1200) {
+    speed = -3,5;
+  }
+  if (vijandX < 0) {
+    speed = 3,5;
+  }
+  // kogel
 }
-// vijand
-
-// kogel
-
 
 /**
  * Checkt botsingen
@@ -75,15 +84,15 @@ var beweegAlles = function() {
 var verwerkBotsing = function() {
   // botsing speler tegen vijand
   if (spelerX - vijandX < 50 &&
-      spelerX - vijandX > -50 &&
-      spelerY - vijandY < 50 &&
-      spelerY - vijandY > -50) {
-        console.log("botsing")
-        health = health -1;
-        return true;
+    spelerX - vijandX > -50 &&
+    spelerY - vijandY < 50 &&
+    spelerY - vijandY > -50) {
+    console.log("botsing")
+    health = health - 1;
+    return true;
   }
   // botsing kogel tegen vijand
-  
+
   // update punten en health
 
 };
@@ -99,10 +108,13 @@ var tekenAlles = function() {
   // vijand
 
   fill("black");
-  rect(175, 175, 50, 50);
+  rect(vijandX, vijandY, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 50, 50);
-  
+
+
+
+
   // speler
   fill("white");
   rect(spelerX - 25, spelerY - 25, 50, 50);
@@ -110,26 +122,27 @@ var tekenAlles = function() {
   ellipse(spelerX, spelerY, 10, 10);
 
   // kogel
-  
+
   fill("white");
   ellipse(kogelX, kogelY, 20, 20);
 
-  if (kogelVliegt === false && keyIsDown(32)){ // start kogel schieten
-  kogelVliegt = true;
-    kogelY= spelerY;
-  kogelX = spelerX;
-}
+  if (kogelVliegt === false && keyIsDown(32)) { // start kogel schieten
+    kogelVliegt = true;
+    kogelY = spelerY;
+    kogelX = spelerX;
+  }
+
 
   if (kogelVliegt === true) { // kogel vliegt
-  kogelY = kogelY -5;
+    kogelY = kogelY - 5;
   }
 
-  if(kogelVliegt === true && kogelY <-10) { // kogel stopt met vliegen
+
+  if (kogelVliegt === true && kogelY < -10) { // kogel stopt met vliegen
     kogelVliegt = false;
- health_vijand = health_vijand -1;
-  
+
   }
-  
+
   // punten en health
 
 };
@@ -163,7 +176,7 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
-    if (health <=0) {
+    if (health <= 0) {
       spelStatus = GAMEOVER;
     }
   }
@@ -174,7 +187,7 @@ function draw() {
     spelerX = 600;
     spelerY = 600;
     textSize(125);
-    text("game over" ,350, 300)
+    text("game over", 350, 300)
     textSize(75);
     text("druk op enter voor start", 275, 450);
     if (keyIsDown(13)) {
@@ -184,20 +197,20 @@ function draw() {
 
 
 
-    if (spelStatus === UITLEG) {
-      console.log("UITLEG")
-      background("blue");
-     fill("white");
-      textSize(60)
-      text("ontwijk de vijand met W A S D", 250, 300);
-      text("druk op enter om te spelen", 300, 425);
-      if (keyIsDown(13)){
-       spelStatus = SPELEN;
-        // enter voor spelen
-      }
-
-      // teken game-over scherm
-      // klik op enter voor restart
+  if (spelStatus === UITLEG) {
+    console.log("UITLEG")
+    background("blue");
+    fill("white");
+    textSize(60)
+    text("ontwijk de vijand met W A S D", 250, 300);
+    text("druk op enter om te spelen", 300, 425);
+    if (keyIsDown(13)) {
+      spelStatus = SPELEN;
+      // enter voor spelen
     }
+
+    // teken game-over scherm
+    // klik op enter voor restart
+  }
 
 }

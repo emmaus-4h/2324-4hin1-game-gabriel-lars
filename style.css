@@ -13,13 +13,6 @@
 }
 
 html, body {
-{
-background-image: url('https://replit.com/@Gabrielb101/2324-4hin1-game-gabriel-lars#cave.jpeg');
-  background-size: cover; 2000; 
-}
-
-
-  
   /* verwijder marge tussen canvas en rand van window
    */ 
   margin: 0px;
