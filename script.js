@@ -67,12 +67,13 @@ var beweegAlles = function() {
   // vijand
   vijandX = vijandX + speed;
   
-  if (vijandX > 1200) {
+  if (vijandX > spelerX) {
     speed = -3,5;
   }
-  if (vijandX < 0) {
+  if (vijandX < spelerX) {
     speed = 3,5;
   }
+
   // kogel
 }
 
@@ -85,7 +86,7 @@ var verwerkBotsing = function() {
   // botsing speler tegen vijand
   if (spelerX - vijandX < 50 &&
     spelerX - vijandX > -50 &&
-    spelerY - vijandY < 50 &&
+    spelerY - vijandY < 50 && // was allemaal 50
     spelerY - vijandY > -50) {
     console.log("botsing")
     health = health - 1;
@@ -108,9 +109,9 @@ var tekenAlles = function() {
   // vijand
 
   fill("black");
-  rect(vijandX, vijandY, 50, 50);
-  fill("black");
-  ellipse(spelerX, spelerY, 50, 50);
+  rect(vijandX-25, vijandY-25, 50, 50);
+  fill("yellow");
+  ellipse(vijandX, vijandY, 5, 5);
 
 
 
@@ -134,7 +135,7 @@ var tekenAlles = function() {
 
 
   if (kogelVliegt === true) { // kogel vliegt
-    kogelY = kogelY - 5;
+    kogelY = kogelY - 8;
   }
 
 
@@ -202,8 +203,9 @@ function draw() {
     background("blue");
     fill("white");
     textSize(60)
-    text("ontwijk de vijand met W A S D", 250, 300);
-    text("druk op enter om te spelen", 300, 425);
+    text("ontwijk de vijand met W A S D", 250, 250);
+    text("druk op enter om te spelen", 300, 330);
+    text("schiet met spatie", 400,410)
     if (keyIsDown(13)) {
       spelStatus = SPELEN;
       // enter voor spelen
