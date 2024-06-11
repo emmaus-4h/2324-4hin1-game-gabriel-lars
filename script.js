@@ -32,7 +32,10 @@ var kogelVliegt = false;
 var vijandX = 200;
 var vijandY = 200;
 var health_vijand = 1;
-var speed = 4;
+var speedY = 4;
+var speedX = 4;
+
+
 
 var punten = +1;
 /* ********************************************* */
@@ -65,17 +68,42 @@ var beweegAlles = function() {
     spelerY = spelerY - 5;
   }
   // vijand
-  vijandX = vijandX + speed;
+  vijandX = vijandX + speedX;
+  vijandY = vijandY + speedY;
   
   if (vijandX > spelerX) {
-    speed = -3,5;
+    speedX = -3,5;
   }
+  
   if (vijandX < spelerX) {
-    speed = 3,5;
+    speedX = 3,5;
   }
 
+  if (vijandY > spelerY) {
+    speedY = -3,5;
+  }
+
+  if (vijandY < spelerY) {
+    speedY = 3,5;
+  }
+
+  // speler mag niet buiten de randen van het canvas
+  if (spelerX < 25) {
+    spelerX = 25;
+  } 
+  if (spelerX > 1255) {
+    spelerX = 1255;
+  } 
+  if (spelerY < 25) {
+    spelerY = 25;
+  } 
+  if (spelerY > 720 - 25) {
+    spelerY = 720 - 25;
+  }
   // kogel
 }
+
+
 
 /**
  * Checkt botsingen
@@ -93,7 +121,17 @@ var verwerkBotsing = function() {
     return true;
   }
   // botsing kogel tegen vijand
-
+var kogelRaak = function() {
+  if (kogelX - vijandX < 50 &&
+     kogelX - vijandX > -50 &&
+     kogelY - vijandY < 50 &&  // was allemaal 50
+     kogelY - vijandY > -50) {
+    console.log("kogel raak")
+    health_vijand = health_vijand - 1;
+    return true;
+     }
+     
+}
   // update punten en health
 
 };
@@ -185,6 +223,8 @@ function draw() {
     // teken game-over scherm
     //console.log("gameover");
     console.log("gameover")
+    vijandX = -100;
+    vijandY = -100;
     spelerX = 600;
     spelerY = 600;
     textSize(125);
