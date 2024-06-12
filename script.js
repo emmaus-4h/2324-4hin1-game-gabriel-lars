@@ -22,7 +22,7 @@ var spelStatus = UITLEG;
 const KEY_LEFT = 37;
 
 var spelerX = 600; // x-positie van speler
-var spelerY = 600; // y-positie van speler
+var spelerY = 600; // y-positie van spelersd
 var health = 1;  // health van speler
 
 var kogelX = 400;
@@ -130,7 +130,16 @@ var kogelRaak = function() {
     health_vijand = health_vijand - 1;
     return true;
      }
-     
+
+// if (kogelX > vijandX - 50 && kogelY > vijandY - 50 && kogelY < vijandY +50 && kogelX < vijandX +50){
+//   kogelX.splice(i, 1)
+//   kogelY.splice(i, 1)
+//   kogelrichting.splice (i, 1)
+//   health_vijand = health_vijand- 20;
+  
+// }
+//     }
+  
 }
   // update punten en health
 
