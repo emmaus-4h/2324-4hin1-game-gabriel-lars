@@ -70,37 +70,56 @@ var beweegAlles = function() {
   // vijand
   vijandX = vijandX + speedX;
   vijandY = vijandY + speedY;
-  
+
   if (vijandX > spelerX) {
-    speedX = -3,5;
+    speedX = -3, 5;
   }
-  
+
   if (vijandX < spelerX) {
-    speedX = 3,5;
+    speedX = 3, 5;
   }
 
   if (vijandY > spelerY) {
-    speedY = -3,5;
+    speedY = -3, 5;
   }
 
   if (vijandY < spelerY) {
-    speedY = 3,5;
+    speedY = 3, 5;
   }
 
   // speler mag niet buiten de randen van het canvas
   if (spelerX < 25) {
     spelerX = 25;
-  } 
+  }
   if (spelerX > 1255) {
     spelerX = 1255;
-  } 
+  }
   if (spelerY < 25) {
     spelerY = 25;
-  } 
+  }
   if (spelerY > 720 - 25) {
     spelerY = 720 - 25;
   }
+
   // kogel
+  if (kogelVliegt === false && keyIsDown(32)) { // start kogel schieten
+    kogelVliegt = true;
+    kogelY = spelerY;
+    kogelX = spelerX;
+  }
+
+
+  if (kogelVliegt === true) { // kogel vliegt
+    kogelY = kogelY - 8;
+  }
+
+
+  if (kogelVliegt === true && kogelY < -10) { // kogel stopt met vliegen
+    kogelVliegt = false;
+
+  }
+
+  var kogelIsRaak = kogelRaak();
 }
 
 
@@ -120,27 +139,22 @@ var verwerkBotsing = function() {
     health = health - 1;
     return true;
   }
-  // botsing kogel tegen vijand
+}
+// botsing kogel tegen vijand
 var kogelRaak = function() {
-  if (kogelX - vijandX < 50 &&
-     kogelX - vijandX > -50 &&
-     kogelY - vijandY < 50 &&  // was allemaal 50
-     kogelY - vijandY > -50) {
+  if (kogelX - vijandX < 35 &&
+    kogelX - vijandX > -35 &&
+    kogelY - vijandY < 35 &&  // was allemaal 50
+    kogelY - vijandY > -35) {
     console.log("kogel raak")
     health_vijand = health_vijand - 1;
     return true;
-     }
 
-// if (kogelX > vijandX - 50 && kogelY > vijandY - 50 && kogelY < vijandY +50 && kogelX < vijandX +50){
-//   kogelX.splice(i, 1)
-//   kogelY.splice(i, 1)
-//   kogelrichting.splice (i, 1)
-//   health_vijand = health_vijand- 20;
-  
-// }
-//     }
-  
-}
+  }
+  else {
+    return false;
+  }
+
   // update punten en health
 
 };
@@ -156,7 +170,7 @@ var tekenAlles = function() {
   // vijand
 
   fill("black");
-  rect(vijandX-25, vijandY-25, 50, 50);
+  rect(vijandX - 25, vijandY - 25, 50, 50);
   fill("yellow");
   ellipse(vijandX, vijandY, 5, 5);
 
@@ -174,22 +188,7 @@ var tekenAlles = function() {
   fill("white");
   ellipse(kogelX, kogelY, 20, 20);
 
-  if (kogelVliegt === false && keyIsDown(32)) { // start kogel schieten
-    kogelVliegt = true;
-    kogelY = spelerY;
-    kogelX = spelerX;
-  }
 
-
-  if (kogelVliegt === true) { // kogel vliegt
-    kogelY = kogelY - 8;
-  }
-
-
-  if (kogelVliegt === true && kogelY < -10) { // kogel stopt met vliegen
-    kogelVliegt = false;
-
-  }
 
   // punten en health
 
@@ -254,7 +253,7 @@ function draw() {
     textSize(60)
     text("ontwijk de vijand met W A S D", 250, 250);
     text("druk op enter om te spelen", 300, 330);
-    text("schiet met spatie", 400,410)
+    text("schiet met spatie", 400, 410)
     if (keyIsDown(13)) {
       spelStatus = SPELEN;
       // enter voor spelen
