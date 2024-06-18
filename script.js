@@ -20,10 +20,12 @@ const GAMEOVER = 2;
 const UITLEG = 8;
 var spelStatus = UITLEG;
 const KEY_LEFT = 37;
-
+var aantal;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van spelersd
 var health = 1;  // health van speler
+
+var spelerleven
 
 var kogelX = 400;
 var kogelY = 300;
@@ -36,8 +38,16 @@ var speedY = 4;
 var speedX = 4;
 
 
+var score= 0
+
+
 
 var punten = +1;
+
+ function reset(){
+  score = score
+ }
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -137,6 +147,7 @@ var verwerkBotsing = function() {
     spelerY - vijandY > -50) {
     console.log("botsing")
     health = health - 1;
+    spelerleven = false;
     return true;
   }
 }
@@ -191,7 +202,29 @@ var tekenAlles = function() {
 
 
   // punten en health
+  if(spelStatus === SPELEN) {
+    reset();
+    score = score + 1;  
+    text(score, 50, 100)
+    //gameover scherm
+    setTimeout(() =>{location.reload()},3000);
 
+    
+  }
+  if (spelerleven === false){
+    score = 0;
+    
+  }
+  {spelStatus = SPELEN
+  };
+ 
+  
+
+  
+  
+
+
+  
 };
 
 
