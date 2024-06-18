@@ -27,30 +27,28 @@ var health = 1;  // health van speler
 
 var spelerleven
 var Vijandleven
-var tekenvijand = true;
-var teken_nieuwevijand
 
 var kogelX = 400;
 var kogelY = 300;
 var kogelVliegt = false;
 
- 
 var vijandX = 200;
 var vijandY = 200;
 var health_vijand = 1;
 var speedY = 4;
 var speedX = 4;
 
-var score= 0
+
+var score = 0
 
 
 
 var punten = +1;
 
- function reset(){
+function reset() {
   score = score
 
- }
+}
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -101,26 +99,6 @@ var beweegAlles = function() {
     speedY = 3, 5;
   }
 
-  //sjkdfhweuihdbkjhsdiusdjkbjdks
- if (teken_nieuwevijand) {
-
-  if (vijandX > spelerX) {
-    speedX = -4, 5;
-  }
-
-  if (vijandX < spelerX) {
-    speedX = 4, 5;
-  }
-
-  if (vijandY > spelerY) {
-    speedY = -4, 5;
-  }
-
-  if (vijandY < spelerY) {
-    speedY = 4, 5;
-  }
-
- }
   // speler mag niet buiten de randen van het canvas
   if (spelerX < 25) {
     spelerX = 25;
@@ -136,7 +114,7 @@ var beweegAlles = function() {
   }
 
   // kogel
-  
+
   if (kogelVliegt === false && keyIsDown(74)) {
     kogelVliegt = true
     kogelX = spelerX;
@@ -161,11 +139,52 @@ var beweegAlles = function() {
 
     kogelVliegt = false;
 
-  
+    aantal = aantal + 1;
+    console.log("score = " + aantal)
   }
-  
-  
-  
+
+  if (kogelVliegt === true &&
+    vijandX - kogelX < 26 &&
+    kogelX - vijandX < 26 &&
+    vijandY - kogelY < 26 &&
+    kogelY - vijandY < 26) {
+    kogelVliegt = false;
+
+    aantal = aantal - 1;
+    console.log("score = " + aantal)
+
+
+  }
+
+  if (kogelVliegt === true &&
+    vijandX - kogelX < 26 &&
+    kogelX - vijandX < 26 &&
+    vijandY - kogelY < 26 &&
+    kogelY - vijandY < 26) {
+    kogelVliegt = false;
+    Vijandleven = false;
+
+    aantal = aantal + 1;
+    console.log("score = " + aantal)
+
+
+  }
+  if (kogelVliegt === true &&
+    vijandX - kogelX < 26 &&
+    kogelX - vijandX < 26 &&
+    vijandY - kogelY < 26 &&
+    kogelY - vijandY < 26) {
+    kogelVliegt = false;
+
+    aantal = aantal - 1;
+    console.log("score = " + aantal)
+
+
+  }
+
+
+
+
   if (kogelVliegt === false && keyIsDown(32)) { // start kogel schieten
     kogelVliegt = true;
     kogelY = spelerY;
@@ -213,17 +232,13 @@ var kogelRaak = function() {
     kogelY - vijandY > -35) {
     console.log("kogel raak")
     health_vijand = health_vijand - 1;
-     tekenvijand = false;
-    Vijandleven = false;
-  
-    return teken_nieuwevijand;
-    
+    return true;
+
   }
-  {
-    
+  else {
+    return false;
   }
 
-  
   // update punten en health
 
 };
@@ -238,13 +253,14 @@ var tekenAlles = function() {
 
   // vijand
 
- 
-  if (tekenvijand === true) {
   fill("black");
   rect(vijandX - 25, vijandY - 25, 50, 50);
   fill("yellow");
   ellipse(vijandX, vijandY, 5, 5);
-  }
+
+
+
+
   // speler
   fill("white");
   rect(spelerX - 25, spelerY - 25, 50, 50);
@@ -259,29 +275,30 @@ var tekenAlles = function() {
 
 
   // punten en health
-  if(spelStatus === SPELEN) {
+  if (spelStatus === SPELEN) {
     reset();
-    score = score + 1;  
+    score = score + 1;
     text(score, 50, 100)
     //gameover scherm
-    setTimeout(() =>{location.reload()},10000);
+    setTimeout(() => { location.reload() }, 3000);
 
-    
+
   }
-  if (spelerleven === false){
+  if (spelerleven === false) {
     score = 0;
-    
+
   }
-  {spelStatus = SPELEN
+  {
+    spelStatus = SPELEN
   };
- 
-  
-
-  
-  
 
 
-  
+
+
+
+
+
+
 };
 
 
@@ -297,6 +314,7 @@ var tekenAlles = function() {
 function setup() {
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
+
 
 }
 
