@@ -4,7 +4,7 @@ run = ""
 # A list of globs that specify which files and directories should
 # be hidden in the workspace.
 hidden = [".config", ".github", ".gitpod.yml", ".gitpod", ".vscode", "p5.d.ts", "p5.global-mode.d.ts"]
-modules = ["web:v2-20230623-0b7a606"]
+modules = ["web"]
 
 # hosting is currently hardcoded for this language
 # [hosting]
@@ -12,7 +12,7 @@ modules = ["web:v2-20230623-0b7a606"]
 # directory= "/"
 
 [nix]
-channel = "stable-21_11"
+channel = "stable-23_11"
 
 [languages.html]
 pattern = "**/*.html"
