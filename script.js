@@ -21,11 +21,11 @@ var spelStatus = UITLEG;
 const KEY_LEFT = 37;
 var aantal;
 var spelerX = 600; // x-positie van speler
-var spelerY = 600; // y-positie van spelersd
+var spelerY = 600; // y-positie van speler
 var health = 1;  // health van speler
 
-var spelerleven
-var Vijandleven
+var spelerleven;
+var Vijandleven;
 var tekenvijand = true;
 var teken_nieuwevijand
 
@@ -40,9 +40,7 @@ var health_vijand = 1;
 var speedY = 4;
 var speedX = 4;
 
-var score = 0
-
-
+var score = 0;
 
 var punten = +1;
 
@@ -100,24 +98,24 @@ var beweegAlles = function() {
     speedY = 3, 5;
   }
 
-  //sjkdfhweuihdbkjhsdiusdjkbjdks
+  //nieuwe vijand tekenen
   if (teken_nieuwevijand) {
 
-    if (vijandX > spelerX) {
-      speedX = -4, 5;
-    }
+  if (vijandX > spelerX) {
+    speedX = -4, 5;
+  }
 
-    if (vijandX < spelerX) {
-      speedX = 4, 5;
-    }
+  if (vijandX < spelerX) {
+    speedX = 4, 5;
+  }
 
-    if (vijandY > spelerY) {
-      speedY = -4, 5;
-    }
+  if (vijandY > spelerY) {
+    speedY = -4, 5;
+  }
 
-    if (vijandY < spelerY) {
-      speedY = 4, 5;
-    }
+  if (vijandY < spelerY) {
+    speedY = 4, 5;
+  }
 
   }
   // speler mag niet buiten de randen van het canvas
@@ -156,14 +154,7 @@ var beweegAlles = function() {
     vijandY - kogelY < 26 &&
     kogelY - vijandY < 26) {
 
-    Vijandleven = false;
-
-    kogelVliegt = false;
-
-
   }
-
-
 
   if (kogelVliegt === false && keyIsDown(32)) { // start kogel schieten
     kogelVliegt = true;
@@ -185,20 +176,18 @@ var beweegAlles = function() {
   var kogelisRaak = kogelRaak();
 }
 
-
-
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten dingen
  * Updatet globale variabelen punten en health
  */
+
+// botsing speler tegen vijand
 var verwerkBotsing = function() {
-  // botsing speler tegen vijand
   if (spelerX - vijandX < 50 &&
     spelerX - vijandX > -50 &&
-    spelerY - vijandY < 50 && // was allemaal 50
+    spelerY - vijandY < 50 &&
     spelerY - vijandY > -50) {
-    console.log("botsing")
     health = health - 1;
     spelerleven = false;
     return true;
@@ -208,12 +197,9 @@ var verwerkBotsing = function() {
 var kogelRaak = function() {
   if (kogelX - vijandX < 35 &&
     kogelX - vijandX > -35 &&
-    kogelY - vijandY < 35 &&  // was allemaal 50
+    kogelY - vijandY < 35 && 
     kogelY - vijandY > -35) {
-    console.log("kogel raak")
-    // health_vijand = health_vijand - 1;
-    // tekenvijand = false;
-    // Vijandleven = false;
+     
     vijandX = 0;
     vijandY = 0;
 
@@ -223,8 +209,6 @@ var kogelRaak = function() {
   {
 
   }
-
-
   // update punten en health
 
 };
@@ -257,16 +241,13 @@ var tekenAlles = function() {
   fill("white");
   ellipse(kogelX, kogelY, 20, 20);
 
-
-
   // punten en health
   if (spelStatus === SPELEN) {
     reset();
     score = score + 1;
     text(score, 50, 100)
     //gameover scherm
-    setTimeout(() => { location.reload() }, 1000);
-
+    setTimeout(() => { location.reload() }, 1500);
 
   }
   if (spelerleven === false) {
@@ -277,15 +258,7 @@ var tekenAlles = function() {
     spelStatus = SPELEN
   };
 
-
-
-
-
-
-
-
 };
-
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -309,7 +282,6 @@ function setup() {
  */
 function draw() {
   if (spelStatus === SPELEN) {
-    console.log("spelen")
     health = +1;
     beweegAlles();
     verwerkBotsing();
@@ -322,7 +294,6 @@ function draw() {
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     //console.log("gameover");
-    console.log("gameover")
     vijandX = -100;
     vijandY = -100;
     spelerX = 600;
@@ -336,10 +307,7 @@ function draw() {
     }
   }
 
-
-
   if (spelStatus === UITLEG) {
-    console.log("UITLEG")
     background("blue");
     fill("white");
     textSize(60)
@@ -348,11 +316,7 @@ function draw() {
     text("schiet met spatie", 400, 410)
     if (keyIsDown(13)) {
       spelStatus = SPELEN;
-      // enter voor spelen
+    
     }
-
-    // teken game-over scherm
-    // klik op enter voor restart
   }
-
 }
